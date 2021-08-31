@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:spacex/model/spacex_model.dart';
 import 'package:spacex/view-model/spacex_view_model.dart';
 
 class SpaceXView extends StatefulWidget {
@@ -26,17 +25,55 @@ class _SpaceXViewState extends State<SpaceXView> {
           itemCount: listViewModel.articles.length,
           itemBuilder: (context, index) {
             var data = listViewModel.articles[index];
-
-            return ListTile(
-              title: Row(
-                children: [
-                  SizedBox(
-                    //****** */
-                    width: 100,
-                    child: Text(data.title),
-                  )
-                ],
-              ),
+            return Column(
+              children: [
+                Column(
+                  children: [
+                    Text(data.title),
+                    SizedBox(
+                      width: 500,
+                      child: Image.network(data.imageUrlLarge),
+                    ),
+                    Text("Description"),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(data.description)
+                  ],
+                )
+                /*ListTile(
+                  title: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            image: DecorationImage(
+                                image: NetworkImage(data.imageUrlLarge),
+                                fit: BoxFit.cover)),
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            child: Image.network(data.imageUrlLarge),
+                          ),
+                          Flexible(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Text(data.title),
+                                  Text(data.dateUtc),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),*/
+              ],
             );
           }),
     );
