@@ -24,35 +24,72 @@ class _SpaceXViewState extends State<SpaceXView> {
       appBar: AppBar(
         title: Text(UITextConstants.title),
       ),
-      body: ListView.builder(
-          itemCount: listViewModel.articles.length,
-          itemBuilder: (context, index) {
-            var data = listViewModel.articles[index];
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
+      body: buildListViewSpaceX(listViewModel),
+    );
+  }
+
+  ListView buildListViewSpaceX(SpaceXListViewModel listViewModel) {
+    return ListView.builder(
+        itemCount: listViewModel.articles.length,
+        itemBuilder: (context, index) {
+          var data = listViewModel.articles[index];
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Text(
                   data.title,
                   style: UITextStyles.headerStyle,
                 ),
-                SizedBox(
-                  height: context.dynamicHeight(0.03),
-                ),
-                SizedBox(
-                  width: context.dynamicWidth(1),
-                  child: Image.network(data.imageUrlLarge),
-                ),
-                SizedBox(
-                  height: context.dynamicHeight(0.03),
-                ),
-                Text(
-                  data.description,
-                  style: UITextStyles.descriptionTextStyle,
-                ),
-              ],
-            );
-          }),
-    );
+              ),
+              SizedBox(
+                height: context.dynamicHeight(0.03),
+              ),
+              SizedBox(
+                width: context.dynamicWidth(1),
+                child: Image.network(data.imageUrlLarge),
+              ),
+              SizedBox(
+                height: context.dynamicHeight(0.03),
+              ),
+              Text(
+                data.description,
+                style: UITextStyles.descriptionTextStyle,
+              ),
+              SizedBox(
+                height: context.dynamicHeight(0.03),
+              ),
+              Text(
+                " Date : ${data.dateLocal}",
+                style: UITextStyles.descriptionTextStyle,
+              ),
+              SizedBox(
+                height: context.dynamicHeight(0.03),
+              ),
+              Text(
+                " DateType : ${data.datePrecision}",
+                style: UITextStyles.descriptionTextStyle,
+              ),
+              SizedBox(
+                height: context.dynamicHeight(0.03),
+              ),
+              Text(
+                " Flight Number : ${data.numberFlight}",
+                style: UITextStyles.descriptionTextStyle,
+              ),
+              Text(
+                " Rocket Code  and Ships Code : ${data.rocket},${data.ships} ",
+                style: UITextStyles.descriptionTextStyle,
+              ),
+              SizedBox(
+                height: context.dynamicHeight(0.03),
+              ),
+              Text(
+                " Sources : ${data.redditCampaign},    ${data.redditLauncg}, ",
+                style: UITextStyles.descriptionTextStyle,
+              ),
+            ],
+          );
+        });
   }
 }

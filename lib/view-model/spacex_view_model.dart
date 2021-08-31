@@ -27,16 +27,32 @@ class SpaceXViewModel {
     return _spacex.ships.first;
   }
 
-  String get dateUtc {
-    return _spacex.dateUtc;
+  String get dateLocal {
+    return _spacex.dateLocal;
   }
 
   String get datePrecision {
     return _spacex.datePrecision;
   }
 
+  String get dateUtc {
+    return _spacex.dateUtc;
+  }
+
+  String get numberFlight {
+    return _spacex.flightNumber.toString();
+  }
+
+  String get rocket {
+    return _spacex.rocket.toString();
+  }
+
   String get redditCampaign {
     return _spacex.links.reddit.campaign;
+  }
+
+  String get redditLauncg {
+    return _spacex.links.reddit.launch;
   }
 }
 
