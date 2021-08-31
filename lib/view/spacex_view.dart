@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spacex/view-model/spacex_view_model.dart';
+import 'package:spacex/config/constants/text_constants.dart';
+import 'package:spacex/config/constants/text_styles.dart';
+import 'package:spacex/utils/extensions/spacex_context_extension.dart';
 
 class SpaceXView extends StatefulWidget {
   @override
@@ -19,60 +22,34 @@ class _SpaceXViewState extends State<SpaceXView> {
     var listViewModel = Provider.of<SpaceXListViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("SpaceX"),
+        title: Text(UITextConstants.title),
       ),
       body: ListView.builder(
           itemCount: listViewModel.articles.length,
           itemBuilder: (context, index) {
             var data = listViewModel.articles[index];
             return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  children: [
-                    Text(data.title),
-                    SizedBox(
-                      width: 500,
-                      child: Image.network(data.imageUrlLarge),
-                    ),
-                    Text("Description"),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(data.description)
-                  ],
-                )
-                /*ListTile(
-                  title: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                                image: NetworkImage(data.imageUrlLarge),
-                                fit: BoxFit.cover)),
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            child: Image.network(data.imageUrlLarge),
-                          ),
-                          Flexible(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Text(data.title),
-                                  Text(data.dateUtc),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),*/
+                Text(
+                  data.title,
+                  style: UITextStyles.headerStyle,
+                ),
+                SizedBox(
+                  height: context.dynamicHeight(0.03),
+                ),
+                SizedBox(
+                  width: context.dynamicWidth(1),
+                  child: Image.network(data.imageUrlLarge),
+                ),
+                SizedBox(
+                  height: context.dynamicHeight(0.03),
+                ),
+                Text(
+                  data.description,
+                  style: UITextStyles.descriptionTextStyle,
+                ),
               ],
             );
           }),
